@@ -6,15 +6,19 @@
 
 // @lc code=start
 function searchInsert(nums: number[], target: number): number {
-  let index = nums.indexOf(target)
-  if (index === -1) {
-    index = 0
-    for (const num of nums) {
-      if (num > target) break
-      index++
+  let l = 0
+  let r = nums.length
+  let m
+  while (l < r) {
+    m = Math.floor((l + r) / 2)
+    if (nums[m] === target) return m
+    if (nums[m] < target) {
+      l = m + 1
+    } else {
+      r = m
     }
   }
-  return index
+  return l
 };
 // @lc code=end
 
