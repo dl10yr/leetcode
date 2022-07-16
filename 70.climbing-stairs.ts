@@ -6,7 +6,7 @@
 
 // @lc code=start
 function climbStairs(n: number): number {
-  let dp = []
+  let dp: number[] = []
   dp.push(1)
   dp.push(2)
   for (let i = 3; i <= n; i++) {
