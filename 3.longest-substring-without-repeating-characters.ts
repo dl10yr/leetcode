@@ -5,35 +5,19 @@
  */
 
 // @lc code=start
-interface InitialValue {
-  prev: string,
-  count: number,
-}
-
-const initialValue = {
-  prev: '',
-  count: 0,
-};
-
-const getLongestSubstring = (
-  { prev, count }: InitialValue,
-  currentLetter: string,
-) => {
-  const repeatedIndex = prev.indexOf(currentLetter);
-  const currentLetters = repeatedIndex > -1
-    ? prev.substring(repeatedIndex + 1) + currentLetter
-    : prev + currentLetter;
-  return {
-    prev: currentLetters,
-    count: currentLetters.length > count
-      ? currentLetters.length
-      : count,
-  }
-};
 
 function lengthOfLongestSubstring(s: string): number {
-  const result = s.split('').reduce(getLongestSubstring, initialValue)
-  return result.count;
-};
+  const result = s.split('').reduce((prev, current) => {
+    const beforeAppearedIndex = prev.subString.indexOf(current)
+    const subString = beforeAppearedIndex === -1
+    ? prev.subString + current
+    : prev.subString.slice(beforeAppearedIndex + 1) + current
+
+    return { maxLength: Math.max(prev.maxLength, subString.length), subString }
+  }, { maxLength: 0, subString: '' })
+  return result.maxLength
+}
+
+
 // @lc code=end
 
