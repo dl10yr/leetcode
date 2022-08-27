@@ -5,26 +5,32 @@
  */
 
 // @lc code=start
-function expand(s: string, begin: number, end: number) {
-  while (begin >= 0 && end <= s.length - 1 && s[begin] === s[end]) {
-    begin--
-    end++
-  }
-  return s.substring(begin + 1, end)
-}
-
-
-
 function longestPalindrome(s: string): string {
   if (!s || s.length <= 1) return s
-  let longestPalindrome = s.substring(0, 1)
+  let longest = s.substring(0, 1)
 
   for (let i = 0; i < s.length; i++) {
-    [expand(s, i, i), expand(s, i, i + 1)].forEach((maybeLongest) => {
-      if (maybeLongest.length > longestPalindrome.length) longestPalindrome = maybeLongest
-    })
+    let left = i
+    let right = i
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      left -= 1
+      right += 1
+    }
+    const oddPalindrome = s.slice(left + 1, right)
+
+    left = i
+    right = i + 1
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      left -= 1
+      right += 1
+    }
+    const evenPalindrome = s.slice(left + 1, right)
+
+    if (Math.max(oddPalindrome.length, evenPalindrome.length) > longest.length) {
+      longest = oddPalindrome.length > evenPalindrome.length ? oddPalindrome : evenPalindrome
+    }
   }
-  return longestPalindrome
+  return longest
 }
 
 // @lc code=end
