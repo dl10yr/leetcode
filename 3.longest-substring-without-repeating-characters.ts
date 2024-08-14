@@ -7,15 +7,21 @@
 // @lc code=start
 
 function lengthOfLongestSubstring(s: string): number {
-  const result = s.split('').reduce((prev, current) => {
-    const beforeAppearedIndex = prev.subString.indexOf(current)
-    const subString = beforeAppearedIndex === -1
-    ? prev.subString + current
-    : prev.subString.slice(beforeAppearedIndex + 1) + current
+  const charSet = new Set()
+  let l = 0
+  let res = 0
 
-    return { maxLength: Math.max(prev.maxLength, subString.length), subString }
-  }, { maxLength: 0, subString: '' })
-  return result.maxLength
+  for (let r = 0; r < s.length; r++) {
+    while (charSet.has(s[r])) {
+      charSet.delete(s[l])
+      l++
+    }
+
+    charSet.add(s[r])
+    res = Math.max(res, r - l + 1)
+  }
+
+  return res
 }
 
 
