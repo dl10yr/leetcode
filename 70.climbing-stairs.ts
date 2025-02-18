@@ -6,13 +6,13 @@
 
 // @lc code=start
 function climbStairs(n: number): number {
-  let dp: number[] = []
-  dp.push(1)
-  dp.push(2)
+  let dp: number[] = Array(n + 1).map(_ => 0)
+  dp[1] = 1
+  dp[2] = 2
   for (let i = 3; i <= n; i++) {
-    dp.push(dp[i-2] + dp[i-3])
+    dp[i] = (dp[i-1] + dp[i-2])
   }
-  return dp[n-1]
+  return dp[n]
 };
 // @lc code=end
 
